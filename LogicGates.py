@@ -58,13 +58,11 @@ def xorGate(data1, data2):
 def getResult(data1):
     return data1
 
-
+#calling functions as dictionary elements it is helpful for using one line calling a number of if conditions
 d = {"A": andGate,
      "R": orGate,
      "N": notGate,
      "X": xorGate,
      "O": getResult}
 
-
 pprint(traverse(readline(text)))
-
