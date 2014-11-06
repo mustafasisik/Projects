@@ -1,0 +1,20 @@
+def andGate(data1, data2):
+    if data1 == 1 and data2 == 1:
+        return 1
+    else:
+        return 0
+
+
+def orGate(data1, data2):
+    if data1 == 1 or data2 == 1:
+        return 1
+    else:
+        return 0
+
+
+def notGate(data1):
+    return 1 if data1 == 0 else 0
+
+
+def xorGate(data1, data2):
+    return 1 if data1 != data2 else 0
