@@ -13,56 +13,57 @@ outputCount = int(firsLine[2])
 def readline(text):
     line = text.readline().split()
     gates = []
-    for x in line:
-        gates.append([x])
+    for x in line[:inputCount]:
+        gates.append(["I", int(x)])
+    for x in line[inputCount:]:
+        gates.append([x, []])
     for line in text:
         l = line.split()
         for x in l[1:]:
-            gates[int(x)].append(int(l[0]))
+            gates[int(x)][1].append(int(l[0]))
+    pprint(gates)
+    print " "
     return gates
 
 
-def traverse(data):
-    for e in data:
-        if len(e) < 2:
-            data[data.index(e)] = e[0]
-        elif len(e) < 3:
-            data[data.index(e)] = d[e[0]](data[e[1]][0])
-        else:
-            data[data.index(e)] = d[e[0]](data[e[1]][0], data[e[2]][0])
-    return data
-
-
 def andGate(data1, data2):
-    if data1 == "1" and data2 == "1":
-        return "1"
-    else:
-        return "0"
+    return 1 if (data1, data2) == (1, 1) else 0
 
 
 def orGate(data1, data2):
-    if data1 == "1" or data2 == "1":
-        return "1"
-    else:
-        return "0"
+    return 1 if 1 in (data1, data2) else 0
 
 
 def notGate(data1):
-    return "1" if data1 == "0" else "0"
+    return 1 if data1 == 0 else 0
 
 
 def xorGate(data1, data2):
-    return "1" if data1 != data2 else "0"
+    return 1 if data1 != data2 else 0
 
 
-def getResult(data1):
-    return data1
+def outputs(data):
+    return data
+
+
+def inputs(data):
+    return data
+
 
 #calling functions as dictionary elements it is helpful for using one line calling a number of if conditions
 d = {"A": andGate,
      "R": orGate,
      "N": notGate,
      "X": xorGate,
-     "O": getResult}
+     "O": outputs,
+     "I": inputs}
+
+
+def traverse(data):
+    result = []
+    for idx, e in enumerate(data):
+        print d[e[0]](data[e[1]])
+    return result
+
 
 pprint(traverse(readline(text)))
